@@ -20,14 +20,14 @@ RUN apk add --no-cache \
 
 # Using curl to download mc cli binary and verifying cli is executable
     && curl --fail --silent --show-error --location --output /usr/local/bin/mc "https://github.com/minio/mc/releases/download/${MC_VERSION}/mc.${MC_VERSION}.linux-${MC_ARCH}" \
-    && chmod 755 /usr/local/bin/mc \
+    && chmod 0755 /usr/local/bin/mc \
     && mc --version \
     && addgroup -S -g 10001 backup \
     && adduser -S -D -H -u 10001 -G backup backup \
     && mkdir -p /work /tmp/mc \
 # Creating nonroot system user and group and changing ownership of directories to created system backup user/group
     && chown -R backup:backup /work /tmp/mc
-    
+
 USER 10001:10001
 
 ENV HOME=/work MC_CONFIG_DIR=/tmp/mc
