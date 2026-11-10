@@ -15,8 +15,8 @@ RUN apk add --no-cache \
       nodejs \
       npm \
 # Installing npm to install bw cli and verifying that cli is executable
-    && npm install --global  "@bitwarden/cli@${BW_CLI_VERSION}"
-    && bw --version
+    && npm install --global  "@bitwarden/cli@${BW_CLI_VERSION}" \
+    && bw --version \
 
 # Using curl to download mc cli binary and verifying cli is executable
     && curl --fail --silent --show-error --location --output /usr/local/bin/mc "https://github.com/minio/mc/releases/download/${MC_VERSION}/mc.${MC_VERSION}.linux-${MC_ARCH}"
@@ -26,7 +26,7 @@ RUN apk add --no-cache \
     && adduser -S -D -H -u 10001 -G backup backup \
     && mkdir -p /work /tmp/mc \
 # Creating nonroot system user and group and changing ownership of directories to created system backup user/group
-    && chown -R backup:backup /work /tmp/mc \
+    && chown -R backup:backup /work /tmp/mc
 
 # Copying export script over to usr/local/bin
 COPY --chown=backup:backup export-org-to-minio.sh /usr/local/bin/export-org-to-minio.sh
