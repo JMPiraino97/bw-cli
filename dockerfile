@@ -27,14 +27,8 @@ RUN apk add --no-cache \
     && mkdir -p /work /tmp/mc \
 # Creating nonroot system user and group and changing ownership of directories to created system backup user/group
     && chown -R backup:backup /work /tmp/mc
-
-# Copying export script over to usr/local/bin
-COPY --chown=backup:backup export-org-to-minio.sh /usr/local/bin/export-org-to-minio.sh
-
-RUN chmod 0755 /usr/local/bin/export-org-to-minio.sh
-
+    
 USER 10001:10001
 
 ENV HOME=/work MC_CONFIG_DIR=/tmp/mc
 
-ENTRYPOINT ["/usr/local/bin/export-org-to-minio.sh"]
