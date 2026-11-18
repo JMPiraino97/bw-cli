@@ -19,7 +19,7 @@ RUN apk add --no-cache \
     && bw --version \
 
 # Using curl to download mc cli binary and verifying cli is executable
-    && curl --fail --silent --show-error --location --output /usr/local/bin/mc "https://github.com/minio/mc/releases/download/${MC_VERSION}/mc.${MC_ARCH}.${MC_VERSION}" \
+    && curl --fail --silent --show-error --location --output /usr/local/bin/mc "https://dl.min.io/aistor/mc/release/${MC_ARCH}/mc" \
     && chmod 0755 /usr/local/bin/mc \
     && mc --version \
     && addgroup -S -g 10001 backup \
