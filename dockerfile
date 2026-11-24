@@ -8,7 +8,9 @@ ARG MC_ARCH="linux-amd64"
 # Temporarily using root user to install packages and to write to usr/local/bin
 USER root
 
-RUN apk add --no-cache \
+RUN apk update \
+    && apk upgrade --no-cache \
+    && apk add --no-cache \
       bash \
       ca-certificates \
       curl \
