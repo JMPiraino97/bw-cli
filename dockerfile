@@ -1,8 +1,7 @@
-FROM alpine:3.24
+FROM node:24-alpine3.24
 
 # Defining environment variables for both BW and MC cli binaries
 ARG BW_CLI_VERSION="2026.11.1"
-ARG MC_VERSION="RELEASE.2025-08-13T08-35-41Z"
 ARG MC_ARCH="linux-amd64"
 
 # Temporarily using root user to install packages and to write to usr/local/bin
@@ -14,8 +13,8 @@ RUN apk update \
       bash \
       ca-certificates \
       curl \
-      nodejs \
-      npm \
+    &&  node --version \
+    &&  npm --version \
 # Installing npm to install bw cli and verifying that cli is executable
     && npm install --global  "@bitwarden/cli@${BW_CLI_VERSION}" \
     && bw --version \
